@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6b5vexq64v8r"]
+
+[ext_resource type="Script" path="res://HealthPack.gd" id="1_hlkb1"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_7wr4v"]
+albedo_color = Color(0.937255, 0, 0.0784314, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d33md"]
+material = SubResource( "ORMMaterial3D_7wr4v" )
+size = Vector3(1, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fvc8o"]
+size = Vector3(5, 4, 5)
+
+[node name="HealthPack" type="Area3D"]
+script = ExtResource( "1_hlkb1" )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( "BoxMesh_d33md" )
+surface_material_override/0 = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource( "BoxShape3D_fvc8o" )

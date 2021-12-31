@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dw2d576wrq5nd"]
+
+[ext_resource type="PackedScene" uid="uid://r3slgia0m2sj" path="res://Player.tscn" id="1_14jns"]
+[ext_resource type="PackedScene" uid="uid://c6b5vexq64v8r" path="res://HealthPack.tscn" id="2_rnx5j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bvyxy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unai2"]
+albedo_color = Color(0.384314, 0.635294, 0.25098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fi263"]
+material = SubResource( "StandardMaterial3D_unai2" )
+size = Vector2(400, 400)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ov68r"]
+data = PackedVector3Array(200, 0, 200, -200, 0, 200, 200, 0, -200, -200, 0, 200, -200, 0, -200, 200, 0, -200)
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource( "1_14jns" )]
+axis_lock_angular_z = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999964, -0.00851709, 0, 0.00851709, 0.999964, 0, 2, 0)
+mesh = SubResource( "BoxMesh_bvyxy" )
+surface_material_override/0 = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.292672, 0.956213, 0, -0.956213, 0.292672, 0, 7.13363, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource( "PlaneMesh_fi263" )
+surface_material_override/0 = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource( "ConcavePolygonShape3D_ov68r" )
+
+[node name="HealthPack" parent="." instance=ExtResource( "2_rnx5j" )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75704, 1, -22.1814)
